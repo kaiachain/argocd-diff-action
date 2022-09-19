@@ -1770,14 +1770,13 @@ module.exports =
               });
               responseJson = yield response.json();
               core.debug(`SUCCESS GETTING APP INFOS`);
-              core.debug(`response: ${responseJson}}`)
             }
             catch (e) {
               core.error(e);
               core.debug(`ERROR GETTING APP INFOS`);
             }
             return responseJson.items.filter(app => {
-              return (app.spec.source.repoURL.includes(`${github.context.repo.owner}/${github.context.repo.repo}`) && (app.spec.source.targetRevision === 'master' || app.spec.source.targetRevision === 'main'));
+              return (app.spec.source.repoURL.includes(`${github.context.repo.owner}/${github.context.repo.repo}`) && (app.spec.source.targetRevision === 'master' || app.spec.source.targetRevision === 'main' || app.spec.source.targetRevision === 'HEAD'));
             });
           });
         }
