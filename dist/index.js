@@ -1770,7 +1770,7 @@ module.exports =
               });
               responseJson = yield response.json();
               core.debug(`SUCCESS GETTING APP INFOS`);
-              core.debug(`response: ${response.json()}`)
+              core.debug(`response: ${responseJson}}`)
             }
             catch (e) {
               core.error(e);
