@@ -102,7 +102,7 @@ async function getApps(): Promise<App[]> {
     return (
       app.spec.source.repoURL.includes(
         `${github.context.repo.owner}/${github.context.repo.repo}`
-      ) && (app.spec.source.targetRevision === 'master' || app.spec.source.targetRevision === 'main')
+      ) && (app.spec.source.targetRevision === 'master' || app.spec.source.targetRevision === 'main' || app.spec.source.targetRevision === 'HEAD')
     );
   });
 }
@@ -124,9 +124,8 @@ async function postDiffComment(diffs: Diff[]): Promise<void> {
 App: [\`${app.metadata.name}\`](https://${ARGOCD_SERVER_URL}/applications/${app.metadata.name}) 
 YAML generation: ${error ? ' Error 🛑' : 'Success 🟢'}
 App sync status: ${app.status.sync.status === 'Synced' ? 'Synced ✅' : 'Out of Sync ⚠️ '}
-${
-  error
-    ? `
+${error
+        ? `
 **\`stderr:\`**
 \`\`\`
 ${error.stderr}
@@ -137,12 +136,11 @@ ${error.stderr}
 ${JSON.stringify(error.err)}
 \`\`\`
 `
-    : ''
-}
+        : ''
+      }
 
-${
-  diff
-    ? `
+${diff
+        ? `
 <details>
 
 \`\`\`diff
@@ -151,8 +149,8 @@ ${diff}
 
 </details>
 `
-    : ''
-}
+        : ''
+      }
 ---
 `
   );
