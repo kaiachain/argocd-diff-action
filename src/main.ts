@@ -94,9 +94,10 @@ async function getApps(): Promise<App[]> {
       headers: { Cookie: `argocd.token=${ARGOCD_TOKEN}` }
     });
     responseJson = await response.json();
-    core.info(`Fetching apps from: ${url}`);
+    core.info(`SUCCESS GETTING APP INFOS`);
   } catch (e) {
     core.error(e);
+    core.info(`ERROR GETTING APP INFOS`);
   }
 
   return (responseJson.items as App[]).filter(app => {
