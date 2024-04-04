@@ -1758,7 +1758,6 @@ function getApps() {
                 headers: { Cookie: `argocd.token=${ARGOCD_TOKEN}` }
             });
             responseJson = yield response.json();
-            console.log(responseJson)
         }
         catch (e) {
             core.error(e);
