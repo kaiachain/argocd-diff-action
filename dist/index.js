@@ -1695,7 +1695,7 @@ const ARCH = process.env.ARCH || 'linux';
 const githubToken = core.getInput('github-token');
 core.info(githubToken);
 const ARGOCD_SERVER_URL = core.getInput('argocd-server-url');
-const ARGOCD_TOKEN = core.getInput('argocd-token');
+const ARGOCD_TOKEN = "core.getInput('argocd-token')";
 const VERSION = core.getInput('argocd-version');
 const ENV = core.getInput('environment');
 const PLAINTEXT = core.getInput('plaintext').toLowerCase() === "true";
@@ -1758,7 +1758,6 @@ function getApps() {
                 headers: { Cookie: `argocd.token=${ARGOCD_TOKEN}` }
             });
             responseJson = yield response.json();
-            console.log(ARGOCD_TOKEN)
             console.log(responseJson)
         }
         catch (e) {
