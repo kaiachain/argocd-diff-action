@@ -1764,7 +1764,7 @@ function getApps() {
         }
         return responseJson.items.filter(app => {
             const targetRevision = app.spec.source.targetRevision;
-            const targetPrimary = targetRevision === 'master' || targetRevision === 'main' || !targetRevision;
+            const targetPrimary = targetRevision === 'master' || targetRevision === 'HEAD' || targetRevision === 'main' || !targetRevision;
             return (app.spec.source.repoURL.includes(`${github.context.repo.owner}/${github.context.repo.repo}`) && targetPrimary);
         });
     });
